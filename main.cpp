@@ -16,11 +16,12 @@ void task(std::shared_ptr<Barrier> barrierObj){
 int main(void){
 
   /*!< An array of threads*/
-  std::vector<std::thread> threadArray(5);
+  int threadCount = 5;
+  std::vector<std::thread> threadArray(threadCount);
   /*!< Pointer to barrier object*/
   std::shared_ptr<Barrier> barrierObj( new Barrier);
 
-  barrierObj->setCount(5);
+  barrierObj->setCount(threadCount);
 
   for(int i=0; i < threadArray.size(); i++){
     threadArray[i]=std::thread(task,barrierObj);
