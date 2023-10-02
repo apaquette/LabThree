@@ -5,16 +5,15 @@
 /*! displays the first function in the barrier being executed */
 void task(std::shared_ptr<Barrier> barrierObj){
 
-  std::cout << "first " << std::endl;
+  std::cout << "first\n";
   barrierObj->waitForAll();
-  std::cout << "second" << std::endl;
+  std::cout << "second\n";
 }
 
 
 
 
 int main(void){
-
   /*!< An array of threads*/
   int threadCount = 5;
   std::vector<std::thread> threadArray(threadCount);

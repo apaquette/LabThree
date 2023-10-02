@@ -1,15 +1,20 @@
+#Alex Paquette
+#2-Oct-2023
+
 CC=g++
-FLAGS= -Wall -o barrier
-FILES = Semaphore.cpp Barrier.cpp main.cpp
+CPPFILES = Semaphore.cpp Barrier.cpp main.cpp
+HFILES = Barrier.h Semaphore.h
+OBJFILES = Barrioer.o main.o Semaphore.o
+CFLAGS = -Wall -o barrier
 
 %.o: %.cpp
-	$(CC) -c -o $@ $< $(FLAGS) $(DEBUGFLAGS)
+	$(CC) -c -o $@ $< $(CFLAGS) $(DEBUGFLAGS)
 
-BARRIER: $(FILES)
-	$(CC) $(FILES) $(FLAGS)
+BARRIER: $(CPPFILES)
+	$(CC) $(CPPFILES) $(CFLAGS)
 
-ALL: $(FILES)
-	$(CC) $(FILES) $(FLAGS) $(DEBUGFLAGS) 
+ALL: $(OBJFILES) $(HFILES)
+	$(CC) $(OBJFILES) $(CFLAGS) $(DEBUGFLAGS) 
 
 DEBUG: DEBUGFLAGS = -g -O0
 DEBUG: ALL

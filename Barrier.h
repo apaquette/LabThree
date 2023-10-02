@@ -1,6 +1,5 @@
 #include "Semaphore.h"
 #include <iostream>
-#include <stdio.h>
 
 /*! \class Barrier
     \brief A Barrier Implementation
@@ -11,7 +10,6 @@
 class Barrier
 {
 private:
-
   int count;
   int threadNum;
   bool condition;
@@ -20,7 +18,6 @@ private:
 
 
 public:
-
   Barrier();
   ~Barrier();
   Barrier(int count);

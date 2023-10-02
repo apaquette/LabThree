@@ -19,7 +19,6 @@ Barrier::Barrier(){
 }
 /*! Barrier with parameter constructor*/
 Barrier::Barrier(int count){
-
   this->count = count;
   threadNum = 0;
   condition = false;
@@ -27,9 +26,7 @@ Barrier::Barrier(int count){
   std::shared_ptr<Semaphore> barrierSem(new Semaphore(0));
 }
 /*! Barrier deconstructor*/
-Barrier::~Barrier(){
-
-}
+Barrier::~Barrier(){ }
 
 /*! sets count value*/
 void Barrier::setCount(int x){
@@ -42,7 +39,6 @@ int Barrier::getCount(){
 
 /*! waits for all the threads before starting second half of code*/ 
 void Barrier::waitForAll(){
-
   mutexSem->Wait();//N wait
   threadNum++;
 
