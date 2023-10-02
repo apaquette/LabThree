@@ -23,11 +23,11 @@ int main(void){
 
   barrierObj->setCount(threadCount);
 
-  for(int i=0; i < threadArray.size(); i++){
+  for(unsigned long int i=0; i < threadArray.size(); i++){
     threadArray[i]=std::thread(task,barrierObj);
   }
 
-  for(int i = 0; i < threadArray.size(); i++){
+  for(unsigned long int i = 0; i < threadArray.size(); i++){
     threadArray[i].join();
   }
   

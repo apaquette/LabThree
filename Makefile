@@ -1,12 +1,15 @@
 CC=g++
-CFLAGS= -Wall -o barrier
-FILES = Semaphore.o Barrier.o main.o
+FLAGS= -Wall -o barrier
+FILES = Semaphore.cpp Barrier.cpp main.cpp
 
 %.o: %.cpp
-	$(CC) -c -o $@ $< $(CFLAGS) $(DEBUGFLAGS)
+	$(CC) -c -o $@ $< $(FLAGS) $(DEBUGFLAGS)
+
+BARRIER: $(FILES)
+	$(CC) $(FILES) $(FLAGS)
 
 ALL: $(FILES)
-	$(CC) $(FILES) $(CFLAGS) $(DEBUGFLAGS) 
+	$(CC) $(FILES) $(FLAGS) $(DEBUGFLAGS) 
 
 DEBUG: DEBUGFLAGS = -g -O0
 DEBUG: ALL
