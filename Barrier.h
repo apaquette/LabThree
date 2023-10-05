@@ -13,15 +13,14 @@ private:
   int count;
   int threadNum;
   bool condition;
-  std::shared_ptr<Semaphore> mutexSem;
-  std::shared_ptr<Semaphore> barrierSem;
+  std::shared_ptr<Semaphore> mutex;
+  std::shared_ptr<Semaphore> innerLock;
+  std::shared_ptr<Semaphore> outerLock;
 
 
 public:
-  Barrier();
   ~Barrier();
   Barrier(int count);
-  void setCount(int count);
   int getCount();
   void waitForAll();
 };

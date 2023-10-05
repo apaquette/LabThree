@@ -3,35 +3,22 @@
 /*! \class Barrier
     \brief An Implementation of a barrier Using Semaphores 
 
-   Uses C++11 features such as mutexSem and condition variables to implement a barrier using Semaphores with N number threads
+   Uses C++11 features such as mutex and condition variables to implement a barrier using Semaphores with N number threads
 
 */
 
-/*! Barrier constructor*/
-Barrier::Barrier(){
-  this->count = 0;
-  threadNum = 0;
-  condition = false;
-
-  mutexSem = std::make_shared<Semaphore>(1);
-  barrierSem=std::make_shared<Semaphore>(0);
-
-}
 /*! Barrier with parameter constructor*/
-Barrier::Barrier(int count){
-  this->count = count;
+Barrier::Barrier(int ThreadCount){
+  count = ThreadCount;
   threadNum = 0;
   condition = false;
-  std::shared_ptr<Semaphore> mutexSem(new Semaphore(1));
-  std::shared_ptr<Semaphore> barrierSem(new Semaphore(0));
+  mutex = std::make_shared<Semaphore>(1);
+  innerLock = std::make_shared<Semaphore>(0);//0 for closed
+  outerLock = std::make_shared<Semaphore>(1);//1 for open
 }
 /*! Barrier deconstructor*/
-Barrier::~Barrier(){ }
+Barrier::~Barrier(){ }//NOTHING TO DO
 
-/*! sets count value*/
-void Barrier::setCount(int x){
-  this->count = x;
-}
 /*! returns count value*/
 int Barrier::getCount(){
   return this->count;
@@ -39,17 +26,23 @@ int Barrier::getCount(){
 
 /*! waits for all the threads before starting second half of code*/ 
 void Barrier::waitForAll(){
-  mutexSem->Wait();//N wait
-  threadNum++;
-
+  mutex->Wait();
+  ++threadNum;
   if(threadNum == count){
-    barrierSem->Signal();//1 signal
-    threadNum = 0;
+    outerLock->Wait();//won't block because it's initialized to 1, 1 wait is allowed without blockign the code
+    innerLock->Signal();
   }
-  mutexSem->Signal();//N signal
-  barrierSem->Wait();//N waits
-  barrierSem->Signal();//N signal (this needs to happen N-1 times)
+  mutex->Signal();
+  innerLock->Wait();
+  innerLock->Signal();
 
-  //result is N+1 signal for every N waits (need to solve this somehow)
+  mutex->Wait();
+  --threadNum;
+  if(threadNum == 0){
+    innerLock->Wait();
+    outerLock->Signal();
+  }
+  mutex->Signal();
+  outerLock->Wait();
+  outerLock->Signal();
 }
-
