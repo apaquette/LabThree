@@ -8,6 +8,7 @@ void task(std::shared_ptr<Barrier> barrierObj){
     std::cout << "first\n";
     barrierObj->waitForAll();
     std::cout << "second\n";
+    barrierObj->waitForAll();
   }
 }
 
