@@ -4,9 +4,11 @@
 
 /*! displays the first function in the barrier being executed */
 void task(std::shared_ptr<Barrier> barrierObj){
-  std::cout << "first\n";
-  barrierObj->waitForAll();
-  std::cout << "second\n";
+  for(int i = 0; i < 5; ++i){
+    std::cout << "first\n";
+    barrierObj->waitForAll();
+    std::cout << "second\n";
+  }
 }
 
 int main(void){
