@@ -27,8 +27,8 @@ int Barrier::getCount(){
 /*! waits for all the threads before starting second half of code*/ 
 void Barrier::waitForAll(){
   mutex->Wait();
-  ++threadNum;
-  if(threadNum == count){
+  //++threadNum;
+  if(++threadNum == count){
     outerLock->Wait();//won't block because it's initialized to 1, 1 wait is allowed without blockign the code
     innerLock->Signal();
   }
@@ -37,8 +37,8 @@ void Barrier::waitForAll(){
   innerLock->Signal();
 
   mutex->Wait();
-  --threadNum;
-  if(threadNum == 0){
+  //--threadNum;
+  if(--threadNum == 0){
     innerLock->Wait();
     outerLock->Signal();
   }
