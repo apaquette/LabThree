@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['barrier_8',['Barrier',['../classBarrier.html',1,'']]]
+  ['barrier_11',['Barrier',['../classBarrier.html',1,'']]]
 ];

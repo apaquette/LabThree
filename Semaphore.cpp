@@ -7,7 +7,10 @@
 */
 
 
-/*! closes thread */ 
+/*!
+      \fn void Semaphore::Wait()
+      \brief Closes thread
+*/
 void Semaphore::Wait()
 {
       std::unique_lock< std::mutex > lock(m_mutex);
@@ -16,7 +19,10 @@ void Semaphore::Wait()
 }
 
 
-/*! allows a thread to open */
+/*!
+      \fn void Semaphore::Signal()
+      \brief Unlock the mutex
+*/
 void Semaphore::Signal() 
 {
       std::unique_lock< std::mutex > lock(m_mutex);

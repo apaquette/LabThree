@@ -2,7 +2,15 @@
 #include <thread>
 #include <vector>
 
-/*! displays the first function in the barrier being executed */
+/*! \file main.cpp
+    \brief main file for demonstrating Barriers
+*/
+
+/*! 
+  \fn void task(std::shared_ptr<Barrier> barrierObj)
+  \brief Displays the first function in the barrier being executed 
+  \param barrierObj Barrier object used to wait for other threads to catch up
+*/
 void task(std::shared_ptr<Barrier> barrierObj){
   for(int i = 0; i < 5; ++i){
     std::cout << "first\n";

@@ -4,10 +4,12 @@
     \brief An Implementation of a barrier Using Semaphores 
 
    Uses C++11 features such as mutex and condition variables to implement a barrier using Semaphores with N number threads
-
 */
 
-/*! Barrier with parameter constructor*/
+/*! 
+  \fn Barrier::Barrier(int ThreadCount)
+  \brief Barrier with parameter constructor
+*/
 Barrier::Barrier(int ThreadCount){
   count = ThreadCount;
   threadNum = 0;
@@ -16,15 +18,26 @@ Barrier::Barrier(int ThreadCount){
   innerLock = std::make_shared<Semaphore>(0);//0 for closed
   outerLock = std::make_shared<Semaphore>(1);//1 for open
 }
-/*! Barrier deconstructor*/
+
+/*!
+  \fn Barrier::~Barrier()
+  \brief Barrier deconstructor
+*/
 Barrier::~Barrier(){ }//NOTHING TO DO
 
-/*! returns count value*/
+/*! 
+  \fn int Barrier::getCount()
+  \brief returns count value
+  \return The count of the barrier
+*/
 int Barrier::getCount(){
   return this->count;
 }
 
-/*! waits for all the threads before starting second half of code*/ 
+/*! 
+  \fn void Barrier::waitForAll()
+  \brief Waits for all the threads before starting second half of code
+*/ 
 void Barrier::waitForAll(){
   mutex->Wait();
   //++threadNum;

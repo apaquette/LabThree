@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7ebarrier_16',['~Barrier',['../classBarrier.html#a401f40e73302009b305904ffc7825304',1,'Barrier']]]
+  ['task_18',['task',['../main_8cpp.html#a96ca7eba915789dab4c11886f423c42b',1,'main.cpp']]]
 ];
